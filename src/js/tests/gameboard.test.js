@@ -33,4 +33,14 @@ describe("Testing the Gameboard", () => {
     expect(gameboard.recieveAttack({x: 0, y: 0})).toBe("missed");
     expect(gameboard.gameboard[0]).toStrictEqual(["m", "", "", "", "", "", "", "", "", ""])
   })
+
+  test("Recieving an attack (hit)", () => {
+    const gameboard = new Gameboard();
+    const ship = new Ship(3);
+
+    gameboard.placeShip({x: 3, y: 0}, "horizontal", ship);
+    expect(gameboard.recieveAttack({x: 4, y: 0})).toBe("hit");
+
+    expect(gameboard.gameboard[0]).toStrictEqual(["", "", "", ship, "h", ship, "", "", "", ""]);
+  })
 });

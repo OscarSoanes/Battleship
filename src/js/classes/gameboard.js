@@ -17,10 +17,16 @@ export class Gameboard {
 
   recieveAttack(location) {
     const valueAt = this.gameboard[location.y][location.x]; 
-
+    
     if (valueAt === "") {
       this.gameboard[location.y][location.x] = "m";
       return "missed";
+    }
+
+    if (typeof(valueAt) === "object") {
+      valueAt.hit();
+      this.gameboard[location.y][location.x] = "h";
+      return "hit";
     }
   }
 }
