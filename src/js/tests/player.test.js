@@ -10,4 +10,14 @@ describe("Testing the player", () => {
 
         expect(player).toEqual({name: "test", prevMoves: [], gameboard: gameboard, ships: ships})
     })
+
+    test("Placing a ship", () => {
+        const player = new Player("test");
+        const ship = new Ship(2);
+
+        player.placeShip(3, 0, "horizontal")
+
+        expect(player.ships.length).toBe(4);
+        expect(player.gameboard.gameboard[0]).toEqual(["", "", "", ship, ship, "", "", "", "", ""])
+    })
 })
