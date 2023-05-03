@@ -4,27 +4,39 @@ export class Gameboard {
   }
 
   placeShip(location, axis, ship) {
-    const tempGameboard = [...this.gameboard];
-    let collision = false;
+    const startingLocation = JSON.parse(JSON.stringify(location));
+    let shipLength = new Array(ship.length).fill(" ")
 
-    for (let index = 0; index < ship.length; index++) {
-      // if a ship already exists in place
-      if (typeof(this.gameboard[location.y][location.x]) === "object") {
-        collision = true;
+    let x = shipLength.every(() => {
+      if (typeof(this.gameboard[location.y][location.x]) === "object" ||
+          location.y > 9 || location.x > 9
+      ) {
+        return false;
       }
-      
-      this.gameboard[location.y][location.x] = ship
 
       if (axis === "vertical") {
-        location.y++
+        location.y ++;
       } else {
-        location.x++;
+        location.x ++;
       }
+      return true;
+    })
+
+    if (x === false) {
+      return "collision";
     }
 
-    if (collision === true) {
-      this.gameboard = tempGameboard;
-      return "collision"
+    location = startingLocation;
+
+    for (let index = 0; index < ship.length; index++) {
+
+      this.gameboard[location.y][location.x] = ship;
+
+      if (axis === "vertical") {
+        location.y ++
+      } else {
+        location.x ++;
+      }
     }
   }
 

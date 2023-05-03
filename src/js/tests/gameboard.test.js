@@ -76,5 +76,14 @@ describe("Testing the Gameboard", () => {
 
     gameboard.placeShip({x: 0, y: 0}, "horizontal", ship);
     expect(gameboard.placeShip({x: 1, y: 0}, "vertical", secondShip)).toBe("collision")
+    expect(gameboard.gameboard[0]).toEqual([ship, ship, ship, "", "", "", "", "", "", ""])
+  })
+
+  test("Placing ship out of bounds", () => {
+    const gameboard = new Gameboard();
+    const ship = new Ship(3);
+
+    expect(gameboard.placeShip({x: 9, y: 0}, "horizontal", ship)).toBe("collision")
+    expect(gameboard.gameboard[0]).toEqual(["", "", "", "", "", "", "", "", "", ""])
   })
 });
