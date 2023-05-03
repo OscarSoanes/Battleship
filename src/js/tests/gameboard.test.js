@@ -12,11 +12,11 @@ describe("Testing the Gameboard", () => {
     const gameboard = new Gameboard();
     const ship = new Ship(5);
 
-    gameboard.placeShip({x: 3, y: 0}, ship);
+    gameboard.placeShip({x: 3, y: 0}, "horizontal", ship);
     expect(gameboard.gameboard[0]).toStrictEqual(["", "", "", "s", "s", "s", "s", "s", "", "",]);
   });
 
-  test.only("Placing a ship (y)", () => {
+  test("Placing a ship (y)", () => {
     const gameboard = new Gameboard();
     const ship = new Ship(3);
 

@@ -7,7 +7,7 @@ export class Gameboard {
     for (let index = 0; index < ship.length; index++) {
       this.gameboard[location.y][location.x] = "s"
       
-      if (axis = "vertical") {
+      if (axis === "vertical") {
         location.y++
       } else {
         location.x++;
