@@ -34,6 +34,12 @@ footer {
     img {
         width: 2rem;
     }
+
+    img:hover {
+        transform: scale(1.1) rotate(360deg);
+        opacity: 0.8;
+        transition: all 1s;
+    }
 }
 
 button, input {
@@ -49,7 +55,7 @@ button, input {
     justify-content: space-around;
     height: 100%;
 
-    .name-container {
+    #name-container {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -63,6 +69,7 @@ button, input {
 
     input {
         font-weight: 700;
+        width: 200px;
     }
 
     input, button {
@@ -72,6 +79,25 @@ button, input {
         padding: 0.5rem;
         border-width: 2px;
         box-shadow: #D6D5A8 0px 1px 2px;
+    }
+
+    .errorContainer {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+
+        margin-top: 0.5rem;
+        font-weight: 600;
+        color: #f2f2f2;
+
+        img {
+            width: 2rem;
+        }
+    }
+
+    #start-button:hover, #start-button:focus {
+        transform: scale(0.95);
+        transition: transform 1s;
     }
 }
 

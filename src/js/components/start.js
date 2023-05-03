@@ -1,4 +1,5 @@
 import { startGame } from "../game/startGame";
+import Warning from "../../assets/warning.svg";
 
 export function startMenu() {
   const menu = document.querySelector("main");
@@ -15,7 +16,7 @@ export function startMenu() {
 
 function buildNameContainer() {
   const nameContainer = document.createElement("div");
-  nameContainer.classList.add("name-container");
+  nameContainer.setAttribute("id", "name-container");
 
   const label = document.createElement("label");
   label.textContent = "Enter your name:";
@@ -57,6 +58,20 @@ function startButtonEventHandler(event) {
 
     startGame();
   } else {
-    console.log("something went wrong");
+    const nameContainer = document.getElementById("name-container");
+
+    const errorContainer = document.createElement("div");
+    errorContainer.classList.add("errorContainer");
+
+    const warningIcon = new Image();
+    warningIcon.src = Warning;
+
+    const errorMsg = document.createElement("p");
+    errorMsg.classList.add("error");
+    errorMsg.textContent = "Please enter a name!";
+
+    errorContainer.append(warningIcon, errorMsg);
+
+    nameContainer.appendChild(errorContainer);
   }
 }
