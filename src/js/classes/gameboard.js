@@ -3,11 +3,15 @@ export class Gameboard {
     this.gameboard = createGameboard();
   }
 
-  placeShip(location, ship) {
+  placeShip(location, axis, ship) {
     for (let index = 0; index < ship.length; index++) {
       this.gameboard[location.y][location.x] = "s"
       
-      location.x++;
+      if (axis = "vertical") {
+        location.y++
+      } else {
+        location.x++;
+      }
     }
   }
 }
