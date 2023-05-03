@@ -37,6 +37,15 @@ export class Player {
         this.prevMoves.push({x: x, y: y});
         return this.gameboard.recieveAttack({x: x, y: y});
     }
+
+    randomAttack() {
+        const x = Math.round(Math.random() * 9); 
+        const y = Math.round(Math.random() * 9); 
+
+        if (this.incomingAttack(x, y) === "already-found") {
+            this.randomAttack();
+        }
+    }
 }
 
 function generateShips() {

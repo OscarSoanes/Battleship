@@ -74,4 +74,13 @@ describe("Testing the player", () => {
         player.incomingAttack(0, 0);
         expect(player.prevMoves.length).toBe(1);
     })
+
+    test("Random attack", () => {
+        const player = new Player("test"); 
+    
+        for (let index = 0; index < 100; index++) {
+            expect(player.prevMoves.length).toBe(index);
+            player.randomAttack()
+        }
+      })
 })
