@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "watch": "jest --watch *.js",
+    "watch": "jest --watch",
     "start": "webpack-dev-server --config webpack.config.js --open",
     "build": "webpack"
   },
