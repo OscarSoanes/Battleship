@@ -11,10 +11,21 @@ export class Player {
     
     placeShip(x, y, axis) {
         const nextShip = this.ships.shift();
+
         const result = this.gameboard.placeShip({x: x, y: y}, axis, nextShip)
 
         if (result === "collision") {
             this.ships.unshift(nextShip);
+        }
+    }
+
+    autoPlaceShips() {
+        const axis = ["horizontal", "vertical"];
+        while (this.ships.length != 0) {
+            const x = Math.floor(Math.random() * 9); 
+            const y = Math.floor(Math.random() * 9); 
+            const thisAxis = axis[Math.round(Math.random())]
+            this.placeShip(x, y, thisAxis);
         }
     }
 

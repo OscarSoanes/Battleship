@@ -44,4 +44,25 @@ describe("Testing the player", () => {
         expect(player.incomingAttack(0, 0)).toBe("hit");
         expect(player.incomingAttack(1, 0)).toBe("sunk");
     })
+
+    test("Auto place ships", () => {
+        const player = new Player("test");
+        player.autoPlaceShips();
+
+        expect(player.ships).toStrictEqual([]);
+        
+        const gameboard = player.gameboard.gameboard;
+        console.log(gameboard);
+        let total = 0;
+
+        for (let x = 0; x < gameboard.length; x++) {
+            for (let y = 0; y < gameboard.length; y++) {
+                if (typeof(gameboard[y][x]) === "object") {
+                    total++;
+                }   
+            }
+        }
+
+        expect(total).toBe(17);
+    })
 })
