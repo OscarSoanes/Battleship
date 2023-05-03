@@ -3,7 +3,7 @@ import { Ship } from "../classes/ship";
 describe("Testing the ships", () => {
   test("Creating a ship", () => {
     const ship = new Ship(5);
-    expect(ship).toBeDefined();
+    expect(ship).toMatchObject({ length: 5, hits: 0 });
   });
 
   test("Hitting a ship", () => {
