@@ -53,7 +53,6 @@ describe("Testing the player", () => {
         expect(player.ships).toStrictEqual([]);
         
         const gameboard = player.gameboard.gameboard;
-        console.log(gameboard);
         let total = 0;
 
         for (let x = 0; x < gameboard.length; x++) {
