@@ -26,6 +26,11 @@ export class Gameboard {
     if (typeof(valueAt) === "object") {
       valueAt.hit();
       this.gameboard[location.y][location.x] = "h";
+
+      if (valueAt.isSunk()) {
+        return "sunk"
+      }
+      
       return "hit";
     }
   }
