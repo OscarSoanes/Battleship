@@ -10,7 +10,13 @@ export class Player {
     }
     
     placeShip(x, y, axis) {
-        this.gameboard.placeShip({x: x, y: y}, axis, this.ships.shift())
+        const nextShip = this.ships.shift();
+        const result = this.gameboard.placeShip({x: x, y: y}, axis, nextShip)
+
+        if (result === "collision") {
+            this.ships.unshift(nextShip);
+        }
+
     }
 }
 

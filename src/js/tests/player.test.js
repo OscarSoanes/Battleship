@@ -20,4 +20,12 @@ describe("Testing the player", () => {
         expect(player.ships.length).toBe(4);
         expect(player.gameboard.gameboard[0]).toEqual(["", "", "", ship, ship, "", "", "", "", ""])
     })
+
+    test("Overlapping a ship", () => {
+        const player = new Player("test");
+        player.placeShip(3, 0, "horizontal");
+        player.placeShip(4, 0, "vertical");
+
+        expect(player.ships.length).toBe(4);
+    })
 })
