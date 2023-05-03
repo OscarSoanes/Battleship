@@ -1,3 +1,5 @@
+import { startGame } from "../game/startGame";
+
 export function startMenu() {
   const menu = document.querySelector("main");
 
@@ -13,15 +15,17 @@ export function startMenu() {
 
 function buildNameContainer() {
   const nameContainer = document.createElement("div");
+  nameContainer.classList.add("name-container");
 
   const label = document.createElement("label");
-  label.textContent = "Name";
+  label.textContent = "Enter your name:";
   label.htmlFor = "name";
-  label.classList.add("invisible");
 
   const input = document.createElement("input");
   input.type = "text";
   input.name = "name";
+  input.placeholder = "What is your name?";
+
   input.setAttribute("id", "name");
 
   nameContainer.append(label, input);
@@ -48,7 +52,10 @@ function startButtonEventHandler(event) {
   const name = document.getElementById("name").value;
 
   if (name.trim() !== "") {
-    console.log("ok");
+    const startMenu = document.getElementById("start-menu");
+    startMenu.classList.add("hide-game-menu");
+
+    startGame();
   } else {
     console.log("something went wrong");
   }
