@@ -16,7 +16,10 @@ export class Player {
         if (result === "collision") {
             this.ships.unshift(nextShip);
         }
+    }
 
+    incomingAttack(x, y) {
+        return this.gameboard.recieveAttack({x: x, y: y});
     }
 }
 
