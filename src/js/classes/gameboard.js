@@ -3,7 +3,7 @@ export class Gameboard {
     this.gameboard = createGameboard();
   }
 
-  placeShip(location, axis, ship, gameboard) {
+  placeShip(location, axis, ship) {
     const tempGameboard = [...this.gameboard];
     let collision = false;
 
