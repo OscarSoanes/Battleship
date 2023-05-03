@@ -2,6 +2,14 @@ export class Gameboard {
   constructor() {
     this.gameboard = createGameboard();
   }
+
+  placeShip(location, ship) {
+    for (let index = 0; index < ship.length; index++) {
+      this.gameboard[location.y][location.x] = "s"
+      
+      location.x++;
+    }
+  }
 }
 
 function createGameboard() {
