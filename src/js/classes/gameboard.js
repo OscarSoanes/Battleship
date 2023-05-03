@@ -8,9 +8,11 @@ export class Gameboard {
     let shipLength = new Array(ship.length).fill(" ")
 
     let x = shipLength.every(() => {
-      if (typeof(this.gameboard[location.y][location.x]) === "object" ||
-          location.y > 9 || location.x > 9
-      ) {
+      if (location.y > 9 || location.x > 9) {
+        return false;
+      }
+
+      if (typeof(this.gameboard[location.y][location.x]) === "object") {
         return false;
       }
 
