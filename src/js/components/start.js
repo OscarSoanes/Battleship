@@ -60,6 +60,10 @@ function startButtonEventHandler(event) {
   } else {
     const nameContainer = document.getElementById("name-container");
 
+    if (nameContainer.children.length >= 3) {
+      return;
+    }
+
     const errorContainer = document.createElement("div");
     errorContainer.classList.add("errorContainer");
 
