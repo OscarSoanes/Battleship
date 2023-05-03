@@ -3,15 +3,28 @@ export class Gameboard {
     this.gameboard = createGameboard();
   }
 
-  placeShip(location, axis, ship) {
+  placeShip(location, axis, ship, gameboard) {
+    const tempGameboard = [...this.gameboard];
+    let collision = false;
+
     for (let index = 0; index < ship.length; index++) {
-      this.gameboard[location.y][location.x] = ship
+      // if a ship already exists in place
+      if (typeof(this.gameboard[location.y][location.x]) === "object") {
+        collision = true;
+      }
       
+      this.gameboard[location.y][location.x] = ship
+
       if (axis === "vertical") {
         location.y++
       } else {
         location.x++;
       }
+    }
+
+    if (collision === true) {
+      this.gameboard = tempGameboard;
+      return "collision"
     }
   }
 

@@ -68,4 +68,13 @@ describe("Testing the Gameboard", () => {
 
     expect(gameboard.isSunk()).toBeTruthy();
   })
+
+  test("Overlapping a ship", () => {
+    const gameboard = new Gameboard();
+    const ship = new Ship(3);
+    const secondShip = new Ship(4);
+
+    gameboard.placeShip({x: 0, y: 0}, "horizontal", ship);
+    expect(gameboard.placeShip({x: 1, y: 0}, "vertical", secondShip)).toBe("collision")
+  })
 });
