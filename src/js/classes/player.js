@@ -22,8 +22,8 @@ export class Player {
     autoPlaceShips() {
         const axis = ["horizontal", "vertical"];
         while (this.ships.length != 0) {
-            const x = Math.floor(Math.random() * 9); 
-            const y = Math.floor(Math.random() * 9); 
+            const x = Math.round(Math.random() * 9); 
+            const y = Math.round(Math.random() * 9); 
             const thisAxis = axis[Math.round(Math.random())]
             this.placeShip(x, y, thisAxis);
         }
@@ -33,7 +33,7 @@ export class Player {
         if (this.prevMoves.some(coords => coords.x === x && coords.y === y)) {
             return "already-found";
         }
-        
+
         this.prevMoves.push({x: x, y: y});
         return this.gameboard.recieveAttack({x: x, y: y});
     }
