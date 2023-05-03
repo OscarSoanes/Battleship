@@ -30,6 +30,11 @@ export class Player {
     }
 
     incomingAttack(x, y) {
+        if (this.prevMoves.some(coords => coords.x === x && coords.y === y)) {
+            return "already-found";
+        }
+        
+        this.prevMoves.push({x: x, y: y});
         return this.gameboard.recieveAttack({x: x, y: y});
     }
 }

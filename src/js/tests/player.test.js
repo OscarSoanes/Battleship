@@ -43,6 +43,7 @@ describe("Testing the player", () => {
         expect(player.incomingAttack(7, 0)).toBe("missed");
         expect(player.incomingAttack(0, 0)).toBe("hit");
         expect(player.incomingAttack(1, 0)).toBe("sunk");
+        expect(player.prevMoves.length).toBe(3);
     })
 
     test("Auto place ships", () => {
@@ -64,5 +65,13 @@ describe("Testing the player", () => {
         }
 
         expect(total).toBe(17);
+    })
+
+    test("Prevent duplicated moves", () => {
+        const player = new Player("test");
+        player.incomingAttack(0, 0);
+        expect(player.prevMoves.length).toBe(1);
+        player.incomingAttack(0, 0);
+        expect(player.prevMoves.length).toBe(1);
     })
 })
