@@ -1,0 +1,79 @@
+@import '../../node_modules/scss-reset/_reset.scss';
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;900&display=swap');
+
+$font-family: "Source Sans Pro", sans-serif;
+$body: #1B2430;
+$container: #51557E;
+$text: #D6D5A8;
+$clickable: #694d81;
+
+
+body {
+    display: grid;
+    grid-template-rows: max-content 1fr min-content;
+    font-family: $font-family;
+    background-color: $body;
+    color: $text;
+}
+
+header {
+    margin: auto;
+    font-size: 3rem;
+    font-weight: 900;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
+    background-color: $container;
+    box-shadow: #51557E 0px -1px 4px;
+
+    img {
+        width: 2rem;
+    }
+}
+
+button, input {
+    background-color: $body;
+    color: $text;
+    border: #D6D5A8 1px solid;
+}
+
+#start-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+
+    .name-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+
+        label {
+            font-size: 1.15rem;
+        }
+    }
+
+
+    input {
+        font-weight: 700;
+    }
+
+    input, button {
+        font-size: 1.2rem;
+        text-align: center;
+        border-radius: 1rem;
+        padding: 0.5rem;
+        border-width: 2px;
+        box-shadow: #D6D5A8 0px 1px 2px;
+    }
+}
+
+
+
