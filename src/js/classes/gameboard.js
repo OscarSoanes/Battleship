@@ -28,11 +28,24 @@ export class Gameboard {
       this.gameboard[location.y][location.x] = "h";
 
       if (valueAt.isSunk()) {
-        return "sunk"
+        return "sunk";
       }
-      
+
       return "hit";
     }
+  }
+
+  isSunk() {
+    function checkRow(element) {
+      if (typeof(element) === "object") {
+        return false; 
+      }
+      return true;
+    }
+
+    return this.gameboard.every((row) => {
+      return row.every(checkRow);
+    })
   }
 }
 
