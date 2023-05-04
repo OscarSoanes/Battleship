@@ -13,11 +13,7 @@ export function createGame(player) {
   move.setAttribute("id", "move");
   move.textContent = "Awaiting your move!";
 
-  const result = document.createElement("p");
-  result.setAttribute("id", "result");
-  result.textContent = "It's your move!";
-
-  moveContainer.append(move, result);
+  moveContainer.appendChild(move);
 
   const enemyGrid = createGrid("Enemies Water");
   enemyGrid.setAttribute("id", "enemy-grid");
