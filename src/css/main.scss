@@ -227,6 +227,10 @@ button:hover, button:focus {
         }
     }
 
+    #enemy-grid .cell:hover {
+        background-color: #9dbce960;
+    }
+
     .attacked::after {
         $size: calc($cell-size / 3);
         content: "";
