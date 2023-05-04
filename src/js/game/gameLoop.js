@@ -13,11 +13,18 @@ export function gameLoop(playersGrid, player) {
 
   const enemyGrid = document.querySelectorAll("#enemy-grid .cell");
   enemyGrid.forEach((cell) =>
-    cell.addEventListener("click", () => {
-      enemyClick(cell, computer, player.name);
-      enemyAttack(player);
-    })
+    cell.addEventListener("click", () =>
+      clickEventListeners(cell, computer, player)
+    )
   );
+}
+
+function clickEventListeners(cell, computer, player) {
+  enemyClick(cell, computer, player.name);
+  enemyAttack(player);
+
+  const clone = cell.cloneNode(true);
+  cell.replaceWith(clone);
 }
 
 function enemyClick(cell, computer, playerName) {
