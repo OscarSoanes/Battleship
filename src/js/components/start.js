@@ -1,5 +1,5 @@
 import { startGame } from "../game/startGame";
-import Warning from "../../assets/warning.svg";
+import { errorContainer } from "./createErrorContainer";
 
 export function startMenu() {
   const menu = document.querySelector("main");
@@ -66,18 +66,8 @@ function startButtonEventHandler(event) {
       return;
     }
 
-    const errorContainer = document.createElement("div");
-    errorContainer.classList.add("errorContainer");
+    const error = errorContainer("Please enter a name!");
 
-    const warningIcon = new Image();
-    warningIcon.src = Warning;
-
-    const errorMsg = document.createElement("p");
-    errorMsg.classList.add("error");
-    errorMsg.textContent = "Please enter a name!";
-
-    errorContainer.append(warningIcon, errorMsg);
-
-    nameContainer.appendChild(errorContainer);
+    nameContainer.appendChild(error);
   }
 }

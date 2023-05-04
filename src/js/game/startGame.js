@@ -29,6 +29,11 @@ export function startGame(name) {
   autoPlace.addEventListener("click", () => {
     placeAutoMode(player, cells);
   });
+
+  const startButton = document.getElementById("start-game");
+  startButton.addEventListener("click", () => {
+    goToGameLoop(player);
+  });
 }
 
 /**
@@ -164,5 +169,11 @@ function placeAutoMode(player) {
         element.classList.add("ship");
       }
     }
+  }
+}
+
+function goToGameLoop(player) {
+  if (player.ships.length != 0) {
+    const warningMessage = document.createElement("p");
   }
 }
