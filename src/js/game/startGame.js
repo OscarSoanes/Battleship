@@ -1,6 +1,7 @@
 import { createGame } from "../components/createGame";
 import { Player } from "../classes/player";
 import { getOrientation } from "./getAxis";
+import { errorContainer } from "../components/createErrorContainer";
 
 export function startGame(name) {
   createGame();
@@ -174,6 +175,10 @@ function placeAutoMode(player) {
 
 function goToGameLoop(player) {
   if (player.ships.length != 0) {
-    const warningMessage = document.createElement("p");
+    const startContainer = document.getElementById("start-game-container");
+    const error = errorContainer("Place all your ships before starting!");
+
+    startContainer.prepend(error);
+    return;
   }
 }

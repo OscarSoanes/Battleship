@@ -81,25 +81,25 @@ button, input {
         border-width: 2px;
         box-shadow: #D6D5A8 0px 1px 2px;
     }
-
-    .errorContainer {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-
-        margin-top: 0.5rem;
-        font-weight: 600;
-        color: #f2f2f2;
-
-        img {
-            width: 2rem;
-        }
-    }
 }
 
 button:hover, button:focus {
     transform: scale(0.95);
     transition: transform 350ms ease-in-out;
+}
+
+.errorContainer {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    margin-top: 0.5rem;
+    font-weight: 600;
+    color: #f2f2f2;
+
+    img {
+        width: 2rem;
+    }
 }
 
 #setup-container {
@@ -170,6 +170,10 @@ button:hover, button:focus {
     }
 
     #start-game-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
         margin-top: 1.5rem;
         
         #start-game {
