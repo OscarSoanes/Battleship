@@ -3,7 +3,7 @@ import { createGame } from "../components/createGameLoop";
 
 let isPlayerTurn = true;
 let move;
-const result = document.getElementById("result");
+let waitingTurn = false;
 
 export function gameLoop(playersGrid, player) {
   createGame(playersGrid);
@@ -16,13 +16,14 @@ export function gameLoop(playersGrid, player) {
   );
   enemyGrid.forEach((cell) =>
     cell.addEventListener("click", () => {
-      enemyClick(cell, computer);
+      enemyClick(cell, computer, player.name);
+      enemyAttack(player);
     })
   );
 }
 
-function enemyClick(cell, computer) {
-  if (isPlayerTurn != true) {
+function enemyClick(cell, computer, playerName) {
+  if (isPlayerTurn !== true) {
     return;
   }
   isPlayerTurn = !isPlayerTurn;
@@ -32,27 +33,61 @@ function enemyClick(cell, computer) {
   const y = parseInt(position.y);
 
   const result = computer.incomingAttack(x, y);
+  modifyBoard(result, cell, playerName, "the enemy");
+  isGameOver(computer, playerName);
+}
 
+function enemyAttack(player) {
+  if (isPlayerTurn !== false || waitingTurn === true) {
+    return;
+  }
+  waitingTurn = true;
+  setTimeout(() => {
+    move.textContent = "Awaiting enemy attack!";
+    setTimeout(() => {
+      const result = player.randomAttack();
+      const lastMove = player.prevMoves.slice(-1)[0];
+
+      const element = document.querySelector(
+        `#player-grid [location=\'{"x": "${lastMove.x}", "y": "${lastMove.y}"}\']`
+      );
+      modifyBoard(result, element, "The enemy", "our");
+      isPlayerTurn = !isPlayerTurn;
+      waitingTurn = false;
+      isGameOver(player, "Computer");
+    }, 400);
+  }, 2000);
+}
+
+function modifyBoard(result, cell, name, target) {
   switch (result) {
     case "sunk": {
-      move.textContent =
-        "You fire into enemy waters... you sunk the enemies ship!";
+      move.textContent = `${name} fire's into ${target} waters... ${name} sunk the ${target} ship!`;
       cell.classList.add("attacked", "hit");
       cell.ariaLabel = "hit";
       break;
     }
     case "hit": {
-      move.textContent =
-        "You fire into enemy waters... you hit the enemies ship!";
+      move.textContent = `${name} fire's into ${target} waters... ${name} hit the ${target} ship!`;
       cell.classList.add("attacked", "hit");
       cell.ariaLabel = "hit";
       break;
     }
     case "missed": {
-      move.textContent = "You fire into enemy waters... you missed.";
+      move.textContent = `${name} fire's into ${target} waters... ${name} missed.`;
       cell.classList.add("attacked", "miss");
       cell.ariaLabel = "miss";
       break;
     }
   }
+}
+
+function isGameOver(player, name) {
+  const result = player.gameboard.isSunk();
+
+  if (!result) {
+    return;
+  }
+
+  console.log("Winner" + name);
 }
