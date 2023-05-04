@@ -146,10 +146,11 @@ button, input {
         }
     }
 
-    .axis-container {
+    .axis-container, #button-container {
         display: flex;
         align-items: center;
-        gap: 2rem;
+        justify-content: space-between;
+        width: 100%;
 
         h2 {
             font-size: 1.3rem;
@@ -157,7 +158,18 @@ button, input {
 
         button {
             border-radius: 1rem;
-            padding: 0.5rem;
+            padding: 1rem;
+        }
+    }
+
+    #button-container {
+        margin-top: 1rem;
+
+        #reset-button {
+            border-color: #694d81;
+            border-width: 3px;
+            padding-left: 1rem;
+            padding-right: 1rem;
         }
     }
 }
