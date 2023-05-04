@@ -42,8 +42,12 @@ export class Player {
     const x = Math.round(Math.random() * 9);
     const y = Math.round(Math.random() * 9);
 
-    if (this.incomingAttack(x, y) === "already-found") {
+    const incomingAttack = this.incomingAttack(x, y);
+
+    if (incomingAttack === "already-found") {
       this.randomAttack();
+    } else {
+      return incomingAttack;
     }
   }
 }
