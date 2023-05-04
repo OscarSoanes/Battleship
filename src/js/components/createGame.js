@@ -22,6 +22,7 @@ export function createGame() {
   );
 
   const buttonContainer = document.createElement("section");
+  buttonContainer.setAttribute("id", "button-container");
   const reset = document.createElement("button");
   reset.textContent = "Reset";
   reset.setAttribute("id", "reset-button");
