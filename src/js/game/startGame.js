@@ -5,7 +5,7 @@ import { getOrientation } from "./getAxis";
 export function startGame(name) {
   createGame();
 
-  const player = new Player(name);
+  let player = new Player(name);
 
   const cells = document.querySelectorAll(".cell");
   cells.forEach((cell) => {
@@ -16,6 +16,18 @@ export function startGame(name) {
     cell.addEventListener("click", () => {
       placeShip(cell, player);
     });
+  });
+
+  const reset = document.getElementById("reset-button");
+  reset.addEventListener("click", () => {
+    player = new Player(name);
+
+    resetCells(cells);
+  });
+
+  const autoPlace = document.getElementById("auto-place-button");
+  autoPlace.addEventListener("click", () => {
+    placeAutoMode(player, cells);
   });
 }
 
@@ -125,4 +137,32 @@ function placeShip(cell, player) {
   const axis = getOrientation();
 
   player.placeShip(position.x, position.y, axis);
+}
+
+function resetCells(cells) {
+  cells.forEach((cell) => {
+    cell.classList.remove("ship");
+    cell.classList.remove("hover-effect");
+    cell.classList.remove("cell-error");
+  });
+}
+
+function placeAutoMode(player) {
+  player.autoPlaceShips();
+
+  const gameboard = player.gameboard.gameboard;
+  for (let x = 0; x < gameboard.length; x++) {
+    const row = gameboard[x];
+    for (let y = 0; y < gameboard.length; y++) {
+      const cell = row[y];
+
+      if (typeof cell === "object") {
+        const element = document.querySelector(
+          `[location=\'{"x": "${x}", "y": "${y}"}\']`
+        );
+
+        element.classList.add("ship");
+      }
+    }
+  }
 }
