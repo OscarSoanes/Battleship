@@ -226,6 +226,14 @@ button:hover, button:focus {
             min-height: 8rem;
         }
     }
+    
+    .attacked {
+        cursor: not-allowed !important;
+    }
+    #enemy-grid .cell {
+        cursor: pointer;
+    }
+    
 
     #enemy-grid .cell:hover {
         background-color: #9dbce960;
