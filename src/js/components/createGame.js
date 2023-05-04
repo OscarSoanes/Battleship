@@ -12,6 +12,7 @@ export function createGame() {
   axisContainer.classList.add("axis-container");
 
   const heading = document.createElement("h2");
+  heading.setAttribute("id", "current-axis");
   heading.textContent = "Current Axis: x";
 
   const button = document.createElement("button");
