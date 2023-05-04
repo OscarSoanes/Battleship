@@ -21,8 +21,19 @@ export function createGame() {
     changeAxisEventListener(heading, button)
   );
 
+  const buttonContainer = document.createElement("section");
+  const reset = document.createElement("button");
+  reset.textContent = "Reset";
+  reset.setAttribute("id", "reset-button");
+
+  const auto = document.createElement("button");
+  auto.textContent = "Auto Place";
+  auto.setAttribute("id", "auto-place-button");
+
+  buttonContainer.append(reset, auto);
+
   axisContainer.append(heading, button);
-  gameContainer.append(grid, axisContainer);
+  gameContainer.append(grid, axisContainer, buttonContainer);
 
   main.appendChild(gameContainer);
 }
