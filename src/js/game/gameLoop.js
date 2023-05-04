@@ -11,9 +11,7 @@ export function gameLoop(playersGrid, player) {
   const computer = new Player("Computer");
   computer.autoPlaceShips();
 
-  const enemyGrid = document.querySelectorAll(
-    "#enemy-grid > .grid > .row > .cell"
-  );
+  const enemyGrid = document.querySelectorAll("#enemy-grid .cell");
   enemyGrid.forEach((cell) =>
     cell.addEventListener("click", () => {
       enemyClick(cell, computer, player.name);
