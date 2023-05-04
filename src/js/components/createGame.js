@@ -21,6 +21,8 @@ export function createGame() {
     changeAxisEventListener(heading, button)
   );
 
+  axisContainer.append(heading, button);
+
   const buttonContainer = document.createElement("section");
   buttonContainer.setAttribute("id", "button-container");
   const reset = document.createElement("button");
@@ -33,9 +35,16 @@ export function createGame() {
 
   buttonContainer.append(reset, auto);
 
-  axisContainer.append(heading, button);
-  gameContainer.append(grid, axisContainer, buttonContainer);
+  const startGameSection = document.createElement("section");
+  startGameSection.setAttribute("id", "start-game-container");
 
+  const startGame = document.createElement("button");
+  startGame.setAttribute("id", "start-game");
+  startGame.textContent = "Start Game";
+
+  startGameSection.appendChild(startGame);
+
+  gameContainer.append(grid, axisContainer, buttonContainer, startGameSection);
   main.appendChild(gameContainer);
 }
 
