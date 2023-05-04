@@ -6,8 +6,8 @@ $body: #1B2430;
 $container: #51557E;
 $text: #D6D5A8;
 $clickable: #694d81;
-$ship: #b4cef6;
-
+$ship: #9dbce9;
+$cell-size: 28px;
 
 body {
     display: grid;
@@ -127,8 +127,8 @@ button:hover, button:focus {
 
                 .cell {
                     flex-shrink: 0;
-                    width: 28px;
-                    height: 28px;
+                    width: $cell-size;
+                    height: $cell-size;
                     border: 1px solid white;
                 }
 
@@ -158,6 +158,27 @@ button:hover, button:focus {
         }
     }
 
+    #next-ship {
+        font-size: 1.4rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        align-items: center;
+
+
+        .row {
+            display: flex;
+            
+
+            .cell {
+                width: $cell-size;
+                height: $cell-size;
+                background-color: $ship;
+                border: #f2f2f2 1px solid;
+            }
+        }
+    }
+ 
     #button-container {
         margin-top: 1rem;
 

@@ -2,11 +2,11 @@ import { createGame } from "../components/createGame";
 import { Player } from "../classes/player";
 import { getOrientation } from "./getAxis";
 import { errorContainer } from "../components/createErrorContainer";
+import { placingElement } from "../components/placingElement";
 
 export function startGame(name) {
-  createGame();
-
   let player = new Player(name);
+  createGame(player.ships[0].length);
 
   const cells = document.querySelectorAll(".cell");
   cells.forEach((cell) => {
@@ -22,6 +22,7 @@ export function startGame(name) {
   const reset = document.getElementById("reset-button");
   reset.addEventListener("click", () => {
     player = new Player(name);
+    changeNextShip(player.ships[0]);
 
     resetCells(cells);
   });
@@ -143,6 +144,7 @@ function placeShip(cell, player) {
   const axis = getOrientation();
 
   player.placeShip(position.x, position.y, axis);
+  changeNextShip(player.ships[0]);
 }
 
 function resetCells(cells) {
@@ -154,13 +156,14 @@ function resetCells(cells) {
 }
 
 function placeAutoMode(player) {
+  console.log(player.gameboard.gameboard);
   player.autoPlaceShips();
 
   const gameboard = player.gameboard.gameboard;
-  for (let x = 0; x < gameboard.length; x++) {
-    const row = gameboard[x];
-    for (let y = 0; y < gameboard.length; y++) {
-      const cell = row[y];
+  for (let y = 0; y < gameboard.length; y++) {
+    const row = gameboard[y];
+    for (let x = 0; x < gameboard.length; x++) {
+      const cell = row[x];
 
       if (typeof cell === "object") {
         const element = document.querySelector(
@@ -171,6 +174,9 @@ function placeAutoMode(player) {
       }
     }
   }
+  console.log(player.gameboard.gameboard);
+
+  changeNextShip(player.ships[0]);
 }
 
 function goToGameLoop(player) {
@@ -181,4 +187,20 @@ function goToGameLoop(player) {
     startContainer.prepend(error);
     return;
   }
+
+  const gridContainer = document.getElementsByClassName("grid-container")[0];
+
+  // gameLoop(gridContainer, player);
+}
+
+function changeNextShip(ship) {
+  let length = 0;
+  if (typeof ship === "object") {
+    length = ship.length;
+  }
+
+  const previousShip = document.getElementById("next-ship");
+  const nextShip = placingElement(length);
+
+  previousShip.replaceWith(nextShip);
 }

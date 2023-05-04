@@ -1,6 +1,7 @@
 import { createGrid } from "./grid";
+import { placingElement } from "./placingElement";
 
-export function createGame() {
+export function createGame(startingSize) {
   const main = document.querySelector("main");
 
   const gameContainer = document.createElement("div");
@@ -23,6 +24,8 @@ export function createGame() {
 
   axisContainer.append(heading, button);
 
+  const nextShip = placingElement(startingSize);
+
   const buttonContainer = document.createElement("section");
   buttonContainer.setAttribute("id", "button-container");
   const reset = document.createElement("button");
@@ -44,7 +47,13 @@ export function createGame() {
 
   startGameSection.appendChild(startGame);
 
-  gameContainer.append(grid, axisContainer, buttonContainer, startGameSection);
+  gameContainer.append(
+    grid,
+    axisContainer,
+    nextShip,
+    buttonContainer,
+    startGameSection
+  );
   main.appendChild(gameContainer);
 }
 
