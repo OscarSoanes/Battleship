@@ -9,7 +9,7 @@ export function startGame(name) {
   let player = new Player(name);
   createGame(player.ships[0].length);
 
-  const cells = document.querySelectorAll(".cell");
+  const cells = document.querySelectorAll(".grid .cell");
   cells.forEach((cell) => {
     cell.addEventListener("mouseover", () => {
       removeHoverClassFromCell(cells);
@@ -30,6 +30,7 @@ export function startGame(name) {
 
   const autoPlace = document.getElementById("auto-place-button");
   autoPlace.addEventListener("click", () => {
+    removeHoverClassFromCell(cells);
     placeAutoMode(player, cells);
   });
 
