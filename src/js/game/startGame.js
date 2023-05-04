@@ -156,7 +156,6 @@ function resetCells(cells) {
 }
 
 function placeAutoMode(player) {
-  console.log(player.gameboard.gameboard);
   player.autoPlaceShips();
 
   const gameboard = player.gameboard.gameboard;
@@ -174,7 +173,6 @@ function placeAutoMode(player) {
       }
     }
   }
-  console.log(player.gameboard.gameboard);
 
   changeNextShip(player.ships[0]);
 }
@@ -194,6 +192,8 @@ function goToGameLoop(player) {
 }
 
 function changeNextShip(ship) {
+  removeWarning();
+
   let length = 0;
   if (typeof ship === "object") {
     length = ship.length;
@@ -203,4 +203,16 @@ function changeNextShip(ship) {
   const nextShip = placingElement(length);
 
   previousShip.replaceWith(nextShip);
+}
+
+function removeWarning() {
+  const errorContainer = document.getElementsByClassName("errorContainer")[0];
+
+  if (errorContainer === undefined) {
+    return;
+  }
+
+  const startGameContainer = document.getElementById("start-game-container");
+
+  startGameContainer.removeChild(errorContainer);
 }
