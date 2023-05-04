@@ -3,6 +3,7 @@ import { Player } from "../classes/player";
 import { getOrientation } from "./getAxis";
 import { errorContainer } from "../components/createErrorContainer";
 import { placingElement } from "../components/placingElement";
+import { gameLoop } from "../game/gameLoop";
 
 export function startGame(name) {
   let player = new Player(name);
@@ -185,10 +186,15 @@ function goToGameLoop(player) {
     startContainer.prepend(error);
     return;
   }
+  const gridContainer = document
+    .querySelector(".grid-container")
+    .cloneNode(true);
 
-  const gridContainer = document.getElementsByClassName("grid-container")[0];
+  const main = document.querySelector("main");
+  const setupContainer = document.getElementById("setup-container");
+  main.removeChild(setupContainer);
 
-  // gameLoop(gridContainer, player);
+  gameLoop(gridContainer, player);
 }
 
 function changeNextShip(ship) {
