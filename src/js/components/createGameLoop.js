@@ -15,6 +15,7 @@ export function createGame(player) {
 
   const result = document.createElement("p");
   result.setAttribute("id", "result");
+  result.textContent = "It's your move!";
 
   moveContainer.append(move, result);
 

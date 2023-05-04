@@ -112,40 +112,6 @@ button:hover, button:focus {
     margin-top: 2rem;
     margin-bottom: 2rem;
     gap: 1rem;
-    .grid-container {
-        h2 {
-            text-align: center;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .grid {
-            .row {
-                display: flex;
-                
-
-                .cell {
-                    flex-shrink: 0;
-                    width: $cell-size;
-                    height: $cell-size;
-                    border: 1px solid white;
-                }
-
-                .hover-effect {
-                    background-color: $text;
-                }
-
-                .cell-error {
-                    background-color: #c57b7bb8;
-                }
-
-                .ship {
-                    background-color: $ship;
-                }
-            }
-        }
-    }
 
     .axis-container, #button-container {
         display: flex;
@@ -206,6 +172,65 @@ button:hover, button:focus {
     button {
         border-radius: 1rem;
         padding: 1rem;
+    }
+}
+
+.grid-container {
+    h2 {
+        text-align: center;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+    }
+
+    .grid {
+        .row {
+            display: flex;
+            
+
+            .cell {
+                flex-shrink: 0;
+                width: $cell-size;
+                height: $cell-size;
+                border: 1px solid white;
+            }
+
+            .hover-effect {
+                background-color: $text;
+            }
+
+            .cell-error {
+                background-color: #c57b7bb8;
+            }
+
+            .ship {
+                background-color: $ship;
+            }
+        }
+    }
+}
+
+#game-screen {
+    margin: 1rem 2rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    #move-container {
+        width: 100%;
+        #move {
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        #result {
+            margin-top: 1rem;
+            min-height: 1.5rem;
+            padding: 0.5rem;
+            background-color: #51557E;
+            border-radius: .25rem;
+        }
     }
 }
 
