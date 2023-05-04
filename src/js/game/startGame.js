@@ -8,12 +8,15 @@ export function startGame(name) {
   const player = new Player(name);
 
   const cells = document.querySelectorAll(".cell");
-  cells.forEach((cell) =>
+  cells.forEach((cell) => {
     cell.addEventListener("mouseover", () => {
       removeHoverClassFromCell(cells);
       gridEventListener(cell, player.ships[0], player);
-    })
-  );
+    });
+    cell.addEventListener("click", () => {
+      placeShip(cell, player);
+    });
+  });
 }
 
 /**
@@ -22,6 +25,10 @@ export function startGame(name) {
  * @param {*} ship
  */
 function gridEventListener(cell, ship, player) {
+  if (player.ships.length === 0) {
+    return;
+  }
+
   const length = ship.length;
   const axis = getOrientation();
 
@@ -55,7 +62,6 @@ function removeHoverClassFromCell(cells) {
 
 function hoverOnShip(length, axis, position) {
   for (let index = 0; index < length; index++) {
-    // console.log(`[location=\'{"x": "${position.x}", "y": "${position.y}"}\']`);
     const element = document.querySelector(
       `[location=\'{"x": "${position.x}", "y": "${position.y}"}\']`
     );
@@ -94,4 +100,29 @@ function goUntilError(position, axis, lengthArr, player) {
     position = startingPos;
     return true;
   });
+}
+
+/**
+ *
+ * @param {HTMLDivElement} cell
+ * @param {Player} player
+ */
+function placeShip(cell, player) {
+  if (player.ships.length === 0) {
+    return;
+  }
+
+  if (cell.classList.contains("error-cell")) {
+    return;
+  }
+  const allHover = document.querySelectorAll(".hover-effect");
+  allHover.forEach((shipElement) => {
+    shipElement.classList.add("ship");
+    shipElement.classList.remove("hover-effect");
+  });
+
+  const position = JSON.parse(cell.getAttribute("location"));
+  const axis = getOrientation();
+
+  player.placeShip(position.x, position.y, axis);
 }
