@@ -4,53 +4,60 @@ export class Gameboard {
   }
 
   placeShip(location, axis, ship) {
-    const startingLocation = JSON.parse(JSON.stringify(location));
-    let shipLength = new Array(ship.length).fill(" ")
+    let shipLength = new Array(ship.length).fill(" ");
+    let startingLocation = JSON.parse(JSON.stringify(location));
 
-    let x = shipLength.every(() => {
-      if (location.y > 9 || location.x > 9) {
-        return false;
-      }
+    const outOfBounds = this.checkOutOfBounds(shipLength, location, axis);
 
-      if (typeof(this.gameboard[location.y][location.x]) === "object") {
-        return false;
-      }
-
-      if (axis === "vertical") {
-        location.y ++;
-      } else {
-        location.x ++;
-      }
-      return true;
-    })
-
-    if (x === false) {
-      return "collision";
+    if (outOfBounds === "collision") {
+      return outOfBounds;
     }
 
     location = startingLocation;
 
     for (let index = 0; index < ship.length; index++) {
-
       this.gameboard[location.y][location.x] = ship;
 
       if (axis === "vertical") {
-        location.y ++
+        location.y++;
       } else {
-        location.x ++;
+        location.x++;
       }
     }
   }
 
+  checkOutOfBounds(shipLength, location, axis) {
+    let x = shipLength.every(() => {
+      if (location.y > 9 || location.x > 9) {
+        return false;
+      }
+
+      if (typeof this.gameboard[location.y][location.x] === "object") {
+        return false;
+      }
+
+      if (axis === "vertical") {
+        location.y++;
+      } else {
+        location.x++;
+      }
+      return true;
+    });
+
+    if (x === false) {
+      return "collision";
+    }
+  }
+
   recieveAttack(location) {
-    const valueAt = this.gameboard[location.y][location.x]; 
-    
+    const valueAt = this.gameboard[location.y][location.x];
+
     if (valueAt === "") {
       this.gameboard[location.y][location.x] = "m";
       return "missed";
     }
 
-    if (typeof(valueAt) === "object") {
+    if (typeof valueAt === "object") {
       valueAt.hit();
       this.gameboard[location.y][location.x] = "h";
 
@@ -64,15 +71,15 @@ export class Gameboard {
 
   isSunk() {
     function checkRow(element) {
-      if (typeof(element) === "object") {
-        return false; 
+      if (typeof element === "object") {
+        return false;
       }
       return true;
     }
 
     return this.gameboard.every((row) => {
       return row.every(checkRow);
-    })
+    });
   }
 }
 
