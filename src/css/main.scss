@@ -189,6 +189,7 @@ button:hover, button:focus {
             
 
             .cell {
+                position: relative;
                 flex-shrink: 0;
                 width: $cell-size;
                 height: $cell-size;
@@ -231,6 +232,22 @@ button:hover, button:focus {
             background-color: #51557E;
             border-radius: .25rem;
         }
+    }
+
+    .attacked::after {
+        $size: calc($cell-size / 3);
+        content: "";
+        height: $size;
+        width: $size;
+        top: calc($cell-size / 2 - $size / 2);
+        left: calc($cell-size / 2 - $size / 2);
+        background-color: white;
+        position: absolute;
+        border-radius: 1rem;
+    }
+
+    .hit::after {
+        background-color: red;
     }
 }
 
