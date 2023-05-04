@@ -54,7 +54,9 @@ function startButtonEventHandler(event) {
 
   if (name.trim() !== "") {
     const startMenu = document.getElementById("start-menu");
-    startMenu.classList.add("hide-game-menu");
+    const main = document.querySelector("main");
+
+    main.removeChild(startMenu);
 
     startGame();
   } else {
