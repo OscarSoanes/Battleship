@@ -58,7 +58,7 @@ function startButtonEventHandler(event) {
 
     main.removeChild(startMenu);
 
-    startGame();
+    startGame(name);
   } else {
     const nameContainer = document.getElementById("name-container");
 
