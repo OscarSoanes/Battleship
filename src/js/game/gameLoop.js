@@ -1,16 +1,18 @@
 import { Player } from "../classes/player";
 import { createGame } from "../components/createGameLoop";
+import { endingScreen } from "./end";
 
 let isPlayerTurn = true;
 let move;
 let waitingTurn = false;
+let gameover = false;
 
 export function gameLoop(playersGrid, player) {
   createGame(playersGrid);
   move = document.getElementById("move");
   const computer = new Player("Computer");
   computer.autoPlaceShips();
-
+  console.log(computer.gameboard.gameboard);
   const enemyGrid = document.querySelectorAll("#enemy-grid .cell");
   enemyGrid.forEach((cell) =>
     cell.addEventListener("click", () =>
@@ -23,12 +25,14 @@ function clickEventListeners(cell, computer, player) {
   enemyClick(cell, computer, player.name);
   enemyAttack(player);
 
-  const clone = cell.cloneNode(true);
-  cell.replaceWith(clone);
+  if (cell.classList.contains("attacked")) {
+    const clone = cell.cloneNode(true);
+    cell.replaceWith(clone);
+  }
 }
 
 function enemyClick(cell, computer, playerName) {
-  if (isPlayerTurn !== true) {
+  if (isPlayerTurn !== true || gameover) {
     return;
   }
   isPlayerTurn = !isPlayerTurn;
@@ -43,7 +47,7 @@ function enemyClick(cell, computer, playerName) {
 }
 
 function enemyAttack(player) {
-  if (isPlayerTurn !== false || waitingTurn === true) {
+  if (isPlayerTurn !== false || waitingTurn || gameover) {
     return;
   }
   waitingTurn = true;
@@ -94,5 +98,12 @@ function isGameOver(player, name) {
     return;
   }
 
-  console.log("Winner" + name);
+  gameover = true;
+
+  const main = document.querySelector("main");
+  const container = document.getElementById("game-screen");
+
+  main.removeChild(container);
+
+  endingScreen(name);
 }
