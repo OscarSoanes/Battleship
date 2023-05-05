@@ -12,7 +12,7 @@ export function gameLoop(playersGrid, player) {
   move = document.getElementById("move");
   const computer = new Player("Computer");
   computer.autoPlaceShips();
-  console.log(computer.gameboard.gameboard);
+
   const enemyGrid = document.querySelectorAll("#enemy-grid .cell");
   enemyGrid.forEach((cell) =>
     cell.addEventListener("click", () =>
