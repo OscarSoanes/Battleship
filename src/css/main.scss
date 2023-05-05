@@ -227,7 +227,7 @@ button:hover, button:focus {
         }
     }
     
-    .attacked {
+    .attacked, #player-grid .cell {
         cursor: not-allowed !important;
     }
     #enemy-grid .cell {
